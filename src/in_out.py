@@ -1,37 +1,55 @@
 """Input and Output processing."""
 
-from dataclasses import dataclass
 from typing import Optional
 
 from matplotlib import pyplot as plt
 
+from src.model import DataSequence, DataType
 
-@dataclass
-class DataPoint(object):
-    """Point class."""
 
-    t: float
-    y: float
+def label_constructor(data_seq: DataSequence):
+    """Extract label from DataSequence class."""
+    if data_seq.data_type == DataType.linear:
+        label = f'f(t)={data_seq.k_coef}t'
+    elif data_seq.data_type == DataType.exponential:
+        label = f'f(t)=exp^({-data_seq.k_coef}t)'
+    else:
+        return ''
+
+    if data_seq.m_coef:
+        label += f'{data_seq.m_coef:+}'
+    return label
 
 
 class InOut(object):
     """In and Out processing."""
 
     @classmethod
-    def prepare_data_to_display(cls, proc_data: list[DataPoint], n: Optional[int] = None):
+    def prepare_data_to_display(
+        cls,
+        data_seq: DataSequence,
+        max_n: Optional[int] = None,
+        new_fig: bool = True,
+    ):
         """Prepare graph."""
+        proc_data = data_seq.proc_data
         t_values = [p.t for p in proc_data]
         y_values = [p.y for p in proc_data]
 
-        if n and n < len(t_values):
-            t_values = t_values[:n]
-            y_values = y_values[:n]
+        if max_n and max_n < len(t_values):
+            t_values = t_values[:max_n]
+            y_values = y_values[:max_n]
 
-        plt.figure()
+        if new_fig:
+            plt.figure()
+            plt.grid(True)
+            plt.xlabel('Time, sec')
+            plt.ylabel('Value')
+
+        label = label_constructor(data_seq)
         # draw
-        plt.plot(t_values, y_values)
-
-        return plt
+        plt.plot(t_values, y_values, label=label)
+        plt.legend()
 
     @classmethod
     def show(cls):

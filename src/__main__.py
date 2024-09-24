@@ -4,20 +4,13 @@ from in_out import InOut
 from model import Model, DataType
 
 if __name__ == '__main__':
-    display_data = Model.trend(DataType.linear, 0, 1000, 1, alpha=1)
-    # Model.shift(display_data, 200)
-    # Model.mult(display_data, -1)
+
+    # 2) linear piecewise
+    display_data = Model.trend(DataType.linear, 0, 2.5, 0.01, alpha=1)
     InOut.prepare_data_to_display(display_data)
 
-    # display_data = Model.trend(DataType.linear, 0, 1000, 1)
-    # InOut.display_data(display_data)
-    #
-    # display_data = Model.trend(DataType.exponential, 0, 1000, 1)
-    # InOut.display_data(display_data)
-
-    display_data = Model.trend(DataType.exponential, 0, 1000, 1, alpha=0.06)
-    InOut.prepare_data_to_display(display_data)
+    display_data = Model.trend(DataType.linear, 2.5, 5, 0.01, alpha=2)
+    Model.shift(display_data, -2.5)
+    InOut.prepare_data_to_display(display_data, new_fig=False)
 
     InOut.show()
-
-# кусочно-нелинейную соединить
