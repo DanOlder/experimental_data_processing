@@ -1,10 +1,11 @@
-"""."""
+"""Data modeling."""
+
 import math
 from enum import Enum
 
 import numpy as np
 
-from in_out import DataPoint
+from src.in_out import DataPoint
 
 
 def lin_fun(time_val: int, alpha: float):
@@ -41,15 +42,15 @@ class Model(object):
     def trend(
             cls,
             data_type: DataType,
-            a: float,  # start
-            b: float,  # end
+            data_a: float,  # start
+            data_b: float,  # end
             delta: float,  # distance
             alpha: float = 5,  # for graphs
             # n: int = 1000,  # points number // не уверен, зачем оно нужно здесь, лучше передавать сразу в отрисовку
     ) -> list[DataPoint]:
         """Data calculation."""
         calc_fun = DataType.get_calc_fun(data_type, alpha)[data_type]
-        time_list = np.arange(a, b, delta)
+        time_list = np.arange(data_a, data_b, delta)
         data_list = []
         for time_point in time_list:
             data_list.append(
