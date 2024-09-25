@@ -4,15 +4,17 @@ from typing import Optional
 
 from matplotlib import pyplot as plt
 
-from src.model import DataSequence, DataType
+from src.model import DataSequence, DataType, PlotDataSequence
 
 
-def label_constructor(data_seq: DataSequence) -> str:
+def label_constructor(data_seq: [DataSequence, PlotDataSequence]) -> str:
     """Extract label from DataSequence class."""
     if data_seq.data_type.value == DataType.linear.value:
         label = f'f(t)={data_seq.k_coef}t'
     elif data_seq.data_type.value == DataType.exponential.value:
         label = f'f(t)=exp^({-data_seq.k_coef}t)'
+    elif data_seq.data_type.value == DataType.exponential.value:
+        return 'Noise'
     else:
         return ''
 
