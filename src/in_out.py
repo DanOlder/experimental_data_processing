@@ -7,11 +7,11 @@ from matplotlib import pyplot as plt
 from src.model import DataSequence, DataType
 
 
-def label_constructor(data_seq: DataSequence):
+def label_constructor(data_seq: DataSequence) -> str:
     """Extract label from DataSequence class."""
-    if data_seq.data_type == DataType.linear:
+    if data_seq.data_type.value == DataType.linear.value:
         label = f'f(t)={data_seq.k_coef}t'
-    elif data_seq.data_type == DataType.exponential:
+    elif data_seq.data_type.value == DataType.exponential.value:
         label = f'f(t)=exp^({-data_seq.k_coef}t)'
     else:
         return ''
@@ -33,8 +33,8 @@ class InOut(object):
     ):
         """Prepare graph."""
         proc_data = data_seq.proc_data
-        t_values = [p.t for p in proc_data]
-        y_values = [p.y for p in proc_data]
+        t_values = [p_d.t for p_d in proc_data]
+        y_values = [p_d.y for p_d in proc_data]
 
         if max_n and max_n < len(t_values):
             t_values = t_values[:max_n]
