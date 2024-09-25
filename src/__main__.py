@@ -1,7 +1,7 @@
 """Main file."""
 
-from in_out import InOut
-from model import Model, DataType
+from src.logic.in_out import InOut
+from src.logic.model import Model, DataType
 
 
 def function_type_choice() -> DataType:

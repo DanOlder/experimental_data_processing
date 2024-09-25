@@ -2,8 +2,8 @@
 import unittest
 from dataclasses import dataclass, asdict
 
-from src.in_out import DataPoint
-from src.model import Model, DataType
+from src.logic.in_out import DataPoint
+from src.logic.model import Model, DataType
 
 
 @dataclass

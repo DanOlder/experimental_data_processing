@@ -1,6 +1,6 @@
 """Piecewise linear function example."""
-from src.in_out import InOut
-from src.model import Model, DataType
+from src.logic.in_out import InOut
+from src.logic.model import Model, DataType
 
 if __name__ == '__main__':
     # 1st piece
